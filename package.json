@@ -3,12 +3,29 @@
   "displayName": "Terminal Error Sound Notifier",
   "description": "Plays a sound when an error occurs in the VS Code terminal.",
   "version": "1.0.0",
-  "publisher": "your-publisher-name",
+  "publisher": "SurajSwarnkar1001",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SurajSwarnkar1001/terminal-error-sound-notifier.git"
+  },
   "engines": {
     "vscode": "^1.74.0"
   },
   "activationEvents": [
     "onStartupFinished"
+  ],
+  "categories": [
+    "Other",
+    "Themes",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "sound",
+    "terminal",
+    "error",
+    "meme",
+    "notify"
   ],
   "enabledApiProposals": [
     "terminalDataWriteEvent"
