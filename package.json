@@ -10,7 +10,7 @@
     "url": "https://github.com/SurajSwarnkar1001/terminal-error-sound-notifier.git"
   },
   "engines": {
-    "vscode": "^1.74.0"
+    "vscode": "^1.90.0"
   },
   "activationEvents": [
     "onStartupFinished"
@@ -151,7 +151,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
-    "@types/vscode": "^1.109.0",
+    "@types/vscode": "^1.90.0",
     "typescript": "^5.0.0"
   }
 }
