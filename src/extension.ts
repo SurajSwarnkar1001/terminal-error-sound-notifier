@@ -14,16 +14,21 @@ export function activate(context: vscode.ExtensionContext): void {
     const errorDetector = new ErrorDetector(initialConfig.errorPatterns);
     const soundPlayer = new SoundPlayer();
 
-    // Listen for terminal data
-    const writeDataDisposable = (vscode.window as any).onDidWriteTerminalData(async (event: any) => {
-        if (!isEnabled()) {
-            return;
+    // Listen for terminal command executions using stable Shell Integration APIs
+    const executionStartDisposable = vscode.window.onDidStartTerminalShellExecution(async (event) => {
+        if (!isEnabled()) return;
+
+        // When a command executes, read its data stream
+        const stream = event.execution.read();
+        let executionOutput = '';
+
+        for await (const data of stream) {
+            executionOutput += data;
         }
 
-        const text = event.data;
-        if (errorDetector.containsError(text)) {
+        // Once the command finishes writing to the stream, check for errors
+        if (errorDetector.containsError(executionOutput)) {
             const cfg = getConfig();
-
             if (cfg.builtInSound === 'Custom') {
                 const soundPath = cfg.customSoundPath.trim();
                 if (soundPath !== '') {
@@ -92,7 +97,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
     // Push all disposables to context.subscriptions
     context.subscriptions.push(
-        writeDataDisposable,
+        executionStartDisposable,
         testSoundDisposable,
         enableDisposable,
         disableDisposable,
