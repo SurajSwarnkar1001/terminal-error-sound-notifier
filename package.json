@@ -1,0 +1,143 @@
+{
+  "name": "terminal-error-sound",
+  "displayName": "Terminal Error Sound Notifier",
+  "description": "Plays a sound when an error occurs in the VS Code terminal.",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "enabledApiProposals": [
+    "terminalDataWriteEvent"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "terminalErrorSound.testSound",
+        "title": "Terminal Error Sound: Test Sound"
+      },
+      {
+        "command": "terminalErrorSound.enable",
+        "title": "Terminal Error Sound: Enable"
+      },
+      {
+        "command": "terminalErrorSound.disable",
+        "title": "Terminal Error Sound: Disable"
+      }
+    ],
+    "configuration": {
+      "title": "Terminal Error Sound",
+      "properties": {
+        "terminalErrorSound.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the error sound"
+        },
+        "terminalErrorSound.builtInSound": {
+          "type": "string",
+          "default": "default",
+          "enum": [
+            "default",
+            "Aayie dekhte hai",
+            "Are mujhe chakar ana",
+            "Baap re",
+            "Chal jhoota",
+            "Fahh",
+            "Fahhh",
+            "Ghar ke bhetar aava",
+            "Hamara sakal bura hai",
+            "Hamare yaha aisa",
+            "Laughing meow",
+            "Maloom baap ko mat sika",
+            "Marab na lahu feke",
+            "Moye moye",
+            "Na milo humse jyada",
+            "Pakad",
+            "Pata mjak kroge",
+            "Teriiiii",
+            "abe tu hai kaun",
+            "acha betee",
+            "aisii kya cheez hai",
+            "ammi are bacha lo",
+            "are maiya ",
+            "are mori maya",
+            "dekh to kaise",
+            "dil na diya",
+            "gaali nhi de sakta",
+            "jaisa inhone bataya",
+            "kaha aana padega",
+            "kamra me aava",
+            "le beta",
+            "maja aaya",
+            "meoww",
+            "mere ko kaha aana hai",
+            "mere muh se nikal gayi",
+            "saamne aayie",
+            "sochna padta hai",
+            "sorry sorry",
+            "Custom"
+          ],
+          "description": "Select a built-in sound to play, or select 'Custom' to use the Custom Sound Path below."
+        },
+        "terminalErrorSound.customSoundPath": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to MP3/WAV/OGG file. Only works if Built-in Sound is set to 'Custom'."
+        },
+        "terminalErrorSound.maxDuration": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 60,
+          "default": 0,
+          "description": "Maximum time in seconds the sound is allowed to play. Set to 0 to play the full sound length (No restriction)."
+        },
+        "terminalErrorSound.errorPatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "error",
+            "Error:",
+            "ERROR",
+            "Exception",
+            "exception",
+            "failed",
+            "FAILED",
+            "Fatal",
+            "FATAL",
+            "panic:",
+            "Traceback",
+            "SyntaxError",
+            "TypeError",
+            "ReferenceError",
+            "cannot find",
+            "permission denied"
+          ],
+          "description": "Regex patterns to detect errors in terminal"
+        },
+        "terminalErrorSound.volume": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 80,
+          "description": "Playback volume (0 to 100)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}
